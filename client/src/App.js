@@ -2,8 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import { Button } from "@material-ui/core"
 import { useState } from 'react';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles({
+  btn: {
+    margin: '10px 15px'
+  }
+})
 
 function App() {
+  const classes = useStyles();
   const [info, setInfo] = useState(null);
 
   function onFetchButtonClicked() {
@@ -19,8 +27,8 @@ function App() {
   return (
     <div className="App">
       <p>Hello</p>
-      <Button variant="contained" color="primary" onClick={onFetchButtonClicked}>Fetch</Button>
-      <Button variant="contained" color="primary" onClick={onClearButtonClicked}>Clear</Button>
+      <Button className={classes.btn} variant="contained" color="primary" onClick={onFetchButtonClicked}>Fetch</Button>
+      <Button className={classes.btn} variant="contained" color="primary" onClick={onClearButtonClicked}>Clear</Button>
       {
         info && 
           <p>
