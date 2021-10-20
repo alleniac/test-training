@@ -1,23 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import { Button } from "@material-ui/core"
+import { useState } from 'react';
 
 function App() {
+  const [info, setInfo] = useState(null);
+
+  function onFetchButtonClicked() {
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(payload => setInfo(payload));
+  }
+
+  function onClearButtonClicked() {
+    setInfo(null);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Hello</p>
+      <Button variant="contained" color="primary" onClick={onFetchButtonClicked}>Fetch</Button>
+      <Button variant="contained" color="primary" onClick={onClearButtonClicked}>Clear</Button>
+      {
+        info && 
+          <p>
+            {`Name: ${info.name}`}
+            <br/>
+            {`Position: ${info.position}`}
+          </p>
+      }
     </div>
   );
 }
